@@ -1,5 +1,11 @@
 {
     "name": "japool/hyperf-help-func",
+    "description": "hyperf-help-func to hyperf",
+    "type": "library",
+    "require": {
+        "php": ">=8.0"
+    },
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Japool\\HyperfHelpFunc\\": "src/"
@@ -16,6 +22,5 @@
             "name": "japool",
             "email": "jappol@163.com"
         }
-    ],
-    "require": {}
+    ]
 }
