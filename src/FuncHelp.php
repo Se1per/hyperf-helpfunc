@@ -1,6 +1,6 @@
 <?php
 
-namespace Japool\HelpFunc;
+namespace Japool\HyperfHelpFunc;
 
 use Japool\HyperfHelpFunc\src\AesTrait;
 use Japool\HyperfHelpFunc\src\ArrayTrait;
