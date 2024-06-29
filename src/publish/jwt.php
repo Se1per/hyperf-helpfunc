@@ -13,16 +13,11 @@ declare(strict_types=1);
 return [
     'secret' => \Hyperf\Support\env('JWT_SECRET', 3600000),
     'algorithm' => 'HS256',
-    'exp' => \Hyperf\Support\env('JWT_TOKEN_TIME_OUT'),
+    'exp' => \Hyperf\Support\env('JWT_TOKEN_TIME_OUT',3600),
     'exclude' => [
         '/api/login/loginApi',
     ],
-    'api_token'=>[
-        'secret' => 'your-secret-key44444444',
-        'algorithm' => 'HS256',
-        'exclude' => [
-            '/api/login/loginApi',
-            '/api/wxWorkInside/wxWorkErpLogin',
-        ],
-    ],
+    'x-forwarded-for'=>[
+        '127.0.0.1'
+    ]
 ];
