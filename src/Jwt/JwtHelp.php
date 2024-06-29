@@ -74,36 +74,36 @@ class JwtHelp
 
         } catch (InvalidArgumentException $e) {
             // 提供的密钥/密钥数组为空或格式不正确。
-            throw new SignatureInvalidException($e->getMessage());
-            return [false,'签名失败'];
+//            throw new SignatureInvalidException($e->getMessage());
+            return [false,300002];
         } catch (DomainException $e) {
             // 提供的算法不受支持或
             // 提供的密钥无效或
             // openSSL或libsodium or中引发未知错误
             // 需要libsodium，但不可用。
-            throw new DomainException($e->getMessage());
-            return [false,'签名失败'];
+//            throw new DomainException($e->getMessage());
+            return [false,300002];
         } catch (SignatureInvalidException $e) {
             // 提供的JWT签名验证失败。
-            throw new SignatureInvalidException($e->getMessage());
-            return [false,'签名失败'];
+//            throw new SignatureInvalidException($e->getMessage());
+            return [false,300002];
         } catch (BeforeValidException $e) {
             // 前提是JWT试图在“nbf”索赔或
             // 前提是JWT试图在“iat”索赔之前使用。
 //            throw new BeforeValidException($e->getMessage());
-            return [false,'登录状态超时,请重新登录'];
+            return [false,300001];
         } catch (ExpiredException $e) {
             // 前提是JWT试图在“exp”索赔后使用。
-            return [false,'登录状态超时,请重新登录'];
+            return [false,300001];
         } catch (UnexpectedValueException $e) {
             // 前提是JWT格式错误或
             // 假设JWT缺少算法/使用了不受支持的算法OR
             // 提供的JWT算法与提供的密钥OR不匹配
             // 在密钥/密钥数组中提供的密钥ID为空或无效。
-            return [false,'密钥无效错误'];
+            return [false,300002];
         } catch (Exception $e) {  // 其他错误
 //            throw new ExpiredException($e->getMessage());
-            return [false,'密钥无效错误'];
+            return [false,300003];
         }
 
         return [true,(array) $decoded];
