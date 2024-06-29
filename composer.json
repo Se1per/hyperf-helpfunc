@@ -1,5 +1,5 @@
 {
-    "name": "Japool/hyperf-help-func",
+    "name": "japool/hyperf-help-func",
     "autoload": {
         "psr-4": {
             "Japool\\HyperfHelpFunc\\": "src/"
