@@ -1,0 +1,21 @@
+{
+    "name": "Japool/hyperf-help-func",
+    "autoload": {
+        "psr-4": {
+            "Japool\\HyperfHelpFunc\\": "src/"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Japool\\HyperfHelpFunc\\ConfigProvider"
+        }
+    },
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "japool",
+            "email": "jappol@163.com"
+        }
+    ],
+    "require": {}
+}
