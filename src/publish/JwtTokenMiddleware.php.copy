@@ -77,10 +77,10 @@ class JwtTokenMiddleware implements MiddlewareInterface
 //                return $this->JsonCallBack->JsonMain(300004, '登录已过期,请重新登录');
 //            }
 
-            $decoded['info'] = json_decode(json_encode($decoded['info']));
+            //$decoded['info'] = json_decode(json_encode($decoded['info']),true);
 
             Context::set('userToken', $decoded['info']);
-            //          $user  = Context::get('userToken', null);
+            //$user  = Context::get('userToken', null);
             return $handler->handle($request);
         }
 
