@@ -1,9 +1,10 @@
 <?php
+
 namespace Japool\HyperfHelpFunc;
 
 class XlsWriteMain
 {
-    protected $excel;
+    public $excel;
 
     public function excelExport($path = './template/download/')
     {
@@ -66,29 +67,42 @@ class XlsWriteMain
      * @param $name
      * @return $this
      */
-    public function openSheet($name)
+    public function openSheet($name,$configType = null)
     {
-        $this->excel->openSheet($name);
+        if($configType){
+            $configType  = \Vtiful\Kernel\Excel::SKIP_EMPTY_CELLS;
+        }
+
+        $this->excel = $this->excel->openSheet($name,$configType);
+
+        return $this->excel;
+    }
+
+    /**
+     * 游标按行读取
+     * @return $this
+     */
+    public function nextRow()
+    {
+        $this->excel = $this->excel->nextRow($configType);
 
         return $this;
     }
 
+    /**
+     * 全量读取
+     * @return $this
+     */
+    public function getSheetData()
+    {
+        $this->excel = $this->excel->getSheetData();
+
+        return $this;
+    }
 
     /**
      * 配置转换类型
      * [ //配置转换格式
-     * \Vtiful\Kernel\Excel::TYPE_STRING,
-     * \Vtiful\Kernel\Excel::TYPE_INT,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
-     * \Vtiful\Kernel\Excel::TYPE_STRING,
-     * \Vtiful\Kernel\Excel::TYPE_INT,
-     * \Vtiful\Kernel\Excel::TYPE_STRING,
-     * \Vtiful\Kernel\Excel::TYPE_TIMESTAMP,
      * ]
      * const TYPE_STRING = 0x01;    // 字符串
      * const TYPE_INT = 0x02;       // 整型
