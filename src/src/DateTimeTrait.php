@@ -40,6 +40,32 @@ trait DateTimeTrait
         return $return;
     }
 
+    /**
+     * 判断时间格式
+     * @param $timestamp
+     * @return bool
+     */
+    public function isDateFormatValid($timestamp) {
+
+        if(!is_integer($timestamp)){
+            $timestamp = strtotime($timestamp);
+        }
+
+        // 定义期望的日期格式
+        $format = 'Y-m-d';
+
+        // 将时间戳转换为指定的日期格式
+        $convertedDate = date($format, $timestamp);
+
+        // 使用 DateTime::createFromFormat 验证转换后的日期格式
+        $dateTimeObject = DateTime::createFromFormat($format, $convertedDate);
+
+        // 检查转换是否成功
+        $isValid = $dateTimeObject && $dateTimeObject->format($format) === $convertedDate;
+
+        return $isValid;
+    }
+
     /** 根据年月获取时间戳
      * @param int $year
      * @param int $mouth
@@ -136,7 +162,7 @@ trait DateTimeTrait
      * @param bool $returnFirstDay
      * @return false|string
      */
-    public function getMonthRange($date, bool $returnFirstDay = true )
+    public function getMonthRange($date, bool $returnFirstDay = true)
     {
         $timestamp = strtotime($date);
 
@@ -168,6 +194,22 @@ trait DateTimeTrait
         return $dateArr;
     }
 
+    public static function isValidDateFull($date, $format = 'Y-m-d')
+    {
+        // 使用 DateTime 和格式检查
+        $d = DateTime::createFromFormat($format, $date);
+        if (!($d && $d->format($format) === $date)) {
+            return false;
+        }
+
+        // 进一步检查利用 strtotime
+        if (strtotime($date) === false) {
+            return false;
+        }
+        return true;
+        
+    }
+
     /**
      * 求两个日期之间相差的天数
      * (针对1970年1月1日之后，求之前可以采用泰勒公式)
@@ -175,7 +217,8 @@ trait DateTimeTrait
      * @param string $day2 结束时间
      * @return number
      */
-    public static function diffBetweenTwoDays(string $day1, string $day2): int
+    public
+    static function diffBetweenTwoDays(string $day1, string $day2): int
     {
         $second1 = strtotime($day1);
 
@@ -194,7 +237,8 @@ trait DateTimeTrait
      * @param $date2 $date2[格式如：2012-12-01]
      * @return array
      */
-    public static function diffDate(string $date1, string $date2): array
+    public
+    static function diffDate(string $date1, string $date2): array
     {
 
         if (strtotime($date1) > strtotime($date2)) {
@@ -226,7 +270,8 @@ trait DateTimeTrait
      * @param string $id
      * @return false|float|int|string
      */
-    public static function getAgeByID(string $id)
+    public
+    static function getAgeByID(string $id)
     {
         //过了这年的生日才算多了1周岁
         if (empty($id)) return '';
