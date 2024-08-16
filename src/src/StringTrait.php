@@ -133,11 +133,12 @@ trait StringTrait
 
         if ($Patching !== null) {
             if ($PatchingType == 0) {
-                $str = $str . $Patching;
+                $str = $Patching.$str;
+                $str = substr($str, 0, $length);
             } else {
-                $str = $Patching . $str;
+                $str = $str.$Patching;
+                $str = substr($str, -$length);
             }
-            $str = substr($str, -$length);
         }
 
         return $str;
