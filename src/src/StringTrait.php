@@ -101,14 +101,14 @@ trait StringTrait
      * @param int $length 长度
      * @param int $type 运算字符类型
      * @param string|null $confound 混淆
-     * @param string|null $Patching 填充
      * @param int $PatchingType 0从头部填充 1从尾部填充
+     * @param string|null $Patching 填充
      * @return string
      * @throws Exception
      * User: Se1per
      * Date: 2023/7/5 17:56
      */
-    public function createNonceStr(int $length = 32, int $type = 1, string $confound = null, string $Patching = null, int $PatchingType = 0): string
+    public function createNonceStr(int $length = 32, int $type = 1, string $confound = null, int $PatchingType = 0, string $Patching = null): string
     {
         static $chars = [
             1 => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
