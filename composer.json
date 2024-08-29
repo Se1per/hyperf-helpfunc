@@ -16,7 +16,6 @@
             "config": "Japool\\HyperfHelpFunc\\ConfigProvider"
         }
     },
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "japool",
