@@ -16,6 +16,10 @@
             "config": "Japool\\HyperfHelpFunc\\ConfigProvider"
         }
     },
+    "config": {
+        "sort-packages": true
+    },
+ 
     "authors": [
         {
             "name": "japool",
