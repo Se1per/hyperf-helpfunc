@@ -19,7 +19,6 @@
     "config": {
         "sort-packages": true
     },
- 
     "authors": [
         {
             "name": "japool",
