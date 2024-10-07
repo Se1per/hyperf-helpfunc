@@ -18,7 +18,7 @@ class XlsWriteMain
     }
 
     /** 创建并写入xls (常规表格)
-     * @param $fileName
+     * @param $fileName 
      * @param array $header
      * @param array $data
      * @return $this
