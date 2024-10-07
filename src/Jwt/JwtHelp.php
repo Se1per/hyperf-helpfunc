@@ -24,7 +24,7 @@ use Hyperf\Config\Annotation\Value;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
-class JwtHelp
+trait JwtHelp
 {
     #[Value('jwt')]
     private $config;

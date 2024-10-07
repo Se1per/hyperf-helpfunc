@@ -26,8 +26,7 @@ class JwtTokenMiddleware implements MiddlewareInterface
     #[Inject]
     protected JsonCallBack $JsonCallBack;
 
-    #[Inject]
-    private ?JwtHelp $JwtHelp;
+    use JwtHelp;
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -36,7 +35,7 @@ class JwtTokenMiddleware implements MiddlewareInterface
 
         $routeUrl = $request->getUri()->getPath();
 
-        $white = $this->JwtHelp->whiteRouteList($routeUrl);
+        $white = $this->whiteRouteList($routeUrl);
 
         if ($white) {
             return $handler->handle($request);
@@ -63,7 +62,7 @@ class JwtTokenMiddleware implements MiddlewareInterface
             }
 
             // 验证 JWT 是否合法
-            [$status,$decoded] = $this->JwtHelp->decodeJwtToken($jwtToken);
+            [$status,$decoded] = $this->decodeJwtToken($jwtToken);
 
             if(!$status) return $this->JsonCallBack->JsonMain($decoded);
 
