@@ -26,16 +26,26 @@ class ConfigProvider
                 [
                     'id' => 'config',
                     'description' => 'The config for generate', // 描述
-                    // 建议默认配置放在 publish 文件夹中，文件命名和组件名称相同
                     'source' => __DIR__ . '/publish/jwt.php',  // 对应的配置文件路径
                     'destination' => BASE_PATH . '/config/autoload/jwt.php', // 复制为这个路径下的该文件
                 ],
                 [
-                    'id' => 'middleware',
+                    'id' => 'jwt_middleware',
                     'description' => 'JwtTokenMiddleware generate', // 描述
-                    // 建议默认配置放在 publish 文件夹中，文件命名和组件名称相同
                     'source' => __DIR__ . '/publish/JwtTokenMiddleware.stub',  // 对应的配置文件路径
                     'destination' => BASE_PATH . '/app/Middleware/JwtTokenMiddleware.php', // 复制为这个路径下的该文件
+                ],
+                [
+                    'id' => 'request_middleware',
+                    'description' => 'RequestMiddleware generate',
+                    'source' => __DIR__ . '/publish/RequestMiddleware.stub',  // 对应的配置文件路径
+                    'destination' => BASE_PATH . '/app/Middleware/RequestMiddleware.php', // 复制为这个路径下的该文件
+                ],
+                [
+                    'id' => 'cors_middleware',
+                    'description' => 'CorsMiddleware generate',
+                    'source' => __DIR__ . '/publish/CorsMiddleware.stub',  // 对应的配置文件路径
+                    'destination' => BASE_PATH . '/app/Middleware/CorsMiddleware.php', // 复制为这个路径下的该文件
                 ],
             ],
             // 亦可继续定义其它配置，最终都会合并到与 ConfigInterface 对应的配置储存器中
