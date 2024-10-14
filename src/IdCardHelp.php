@@ -5,9 +5,9 @@
  * Date: 2023/8/23 11:29
  */
 
-namespace App\Lib\Help;
+ namespace Japool\HyperfHelpFunc;
 
-class IdCardLab
+class IdCardHelp
 {
     /**
      * 中华人民共和国省级行政区划代码(不含港澳台地区)
