@@ -1,14 +1,14 @@
 <?php
-namespace App\Utils;
-
 namespace Japool\HyperfHelpFunc;
+
+use Hyperf\Redis\Redis as HyperfRedis;
 
 /**
  * 加入分布式redis锁 符合原子性操作
  * Class RedLock
  * @package Extend\redLock
  */
-class RedLock
+class RedisLock
 {
     private $retryDelay;
     private $retryCount;
