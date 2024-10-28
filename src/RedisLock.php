@@ -1,7 +1,7 @@
 <?php
 namespace App\Utils;
 
-use Hyperf\Redis\Redis as HyperfRedis;
+namespace Japool\HyperfHelpFunc;
 
 /**
  * 加入分布式redis锁 符合原子性操作
