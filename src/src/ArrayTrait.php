@@ -55,28 +55,63 @@ trait ArrayTrait
      */
     public function generateTree(array $list, int $root = 0, string $pk = 'id', string $pid = 'pid', string $child = 'child'): array
     {
-        $tree = [];
-        $packData = [];
+        $tree = array();
+        $packData = array();
 
         foreach ($list as $data) {
             $packData[$data[$pk]] = $data;
         }
 
         foreach ($packData as $key => $val) {
-            if (isset($packData[$val[$pid]])) {
-                if (!isset($packData[$val[$pid]][$child])) {
-                    $packData[$val[$pid]][$child] = [];
-                }
-                $packData[$val[$pid]][$child][] = &$packData[$key];
-            } else {
+            if ($val[$pid] == $root) {
+                //代表跟节点, 重点一
                 $tree[] = &$packData[$key];
+            } else {
+                //找到其父类,重点二
+                $packData[$val[$pid]][$child][] = &$packData[$key];
             }
+        }
+        return $tree;
+    }
+
+    
+    /**
+     *  指定根层级的树状图 (树状协程)
+     * @param array $list 初始数组
+     * @param int $root 最上级一条数据的id
+     * @param string $pk 每一条数据的id
+     * @param string $pid 上下级关系的pid
+     * @param string $child 自定义下级关系的字段
+     * @return  array $tree  树状图数组
+     */
+    public function generateTree1(array $list, int $root = 0, string $pk = 'id', string $pid = 'pid', string $child = 'child'): array
+    {
+        $tree = [];
+        $packData = [];
+
+        $concurrent = new Concurrent(30);
+
+        foreach ($list as $data) {
+            $concurrent->create(function () use ($pk,$data,&$packData) {
+                $packData[$data[$pk]] = $data;
+            });
+        }
+
+        foreach ($packData as $key => $val) {
+            $concurrent->create(function () use ($packData,$key,&$val,$pid,$child,&$tree) {
+                if (isset($packData[$val[$pid]])) {
+                    if (!isset($packData[$val[$pid]][$child])) {
+                        $packData[$val[$pid]][$child] = [];
+                    }
+                    $packData[$val[$pid]][$child][] = &$val;
+                } else {
+                    $tree[] = &$val;
+                }
+            });
         }
 
         return $tree;
     }
-
-
 
     public function sortByByteArray($array, $pIndex, $index)
     {

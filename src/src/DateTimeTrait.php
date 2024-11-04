@@ -121,6 +121,12 @@ trait DateTimeTrait
                 $data['end_time'] = mktime(23, 59, 59, date('m'), date('t'), date('Y'));
                 $data['end_day'] = date('Y-m-d H:i:s', $data['end_time']);
                 return $data;
+            case 'year':
+                $data['begin_time'] = mktime(0, 0, 0, 1, 1, date('Y'));
+                $data['begin_day'] = date('Y-m-d H:i:s', $data['begin_time']);
+                $data['end_time'] = mktime(23, 59, 59, 12, 31, date('Y'));
+                $data['end_day'] = date('Y-m-d H:i:s', $data['end_time']);
+                return $data;
             default:
                 //取今天的 起始时间
                 $data['begin_time'] = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
