@@ -180,6 +180,33 @@ trait DateTimeTrait
         return date('Y-m-' . $mDays . ' 23:59:59', $timestamp);
     }
 
+    /**
+     * 检查给定日期是否在指定范围内
+     *
+     * @param string $dateTime 日期时间字符串，表示需要检查的日期
+     * @param array $dateArray 包含开始日期和结束日期的数组
+     * @return bool 如果给定日期在范围内则返回true，否则返回false
+     */
+    public function isDateInRange($dateTime, $dateArray) {
+        // 将传入的日期时间字符串转为时间戳
+        $dateTimeStamp = strtotime($dateTime);
+    
+        // 确保数组有两个元素
+        if (count($dateArray) < 2) {
+            return false; // 如果数组元素不足，返回 false
+        }
+    
+        // 构建开始时间和结束时间的时间戳
+        $startDate = $dateArray[0] . ' 00:00:00';
+        $endDate = $dateArray[1] . ' 23:59:59';
+    
+        $startTimestamp = strtotime($startDate);
+        $endTimestamp = strtotime($endDate);
+    
+        // 检查日期是否在范围内
+        return $dateTimeStamp >= $startTimestamp && $dateTimeStamp <= $endTimestamp;
+    }
+
     /**  获取时间周期段内所有时间
      * @param string $startDate 开始时间
      * @param string $endDate 结束时间
