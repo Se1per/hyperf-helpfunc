@@ -24,7 +24,7 @@ class XlsWriteMain
      * @return $this
      */
     // Return the current object instance for method chaining.
-    public function generateXls($fileName, array $header, array $data, $memory = true, $sheet = 'sheet1')
+    public function generateXls($fileName, array $header, array $data, $memory = false, $sheet = 'sheet1')
     {
         // fileName 会自动创建一个工作表，你可以自定义该工作表名称，工作表名称为可选参数
         if ($memory) {
@@ -47,7 +47,7 @@ class XlsWriteMain
      * @return $this
      */
     // Return the current object instance for method chaining.
-    public function exportXls($fileName,$header, $memory = true, $sheet = 'sheet1')
+    public function exportXls($fileName,$header, $memory = false, $sheet = 'sheet1')
     {
         // fileName 会自动创建一个工作表，你可以自定义该工作表名称，工作表名称为可选参数
         if ($memory) {
