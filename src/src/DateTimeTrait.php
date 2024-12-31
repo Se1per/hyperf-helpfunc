@@ -207,9 +207,7 @@ trait DateTimeTrait
         // 检查日期是否在范围内
         return $dateTimeStamp >= $startTimestamp && $dateTimeStamp <= $endTimestamp;
     }
-
-
-
+    
     /**  获取时间周期段内所有时间
      * @param string $startDate 开始时间
      * @param string $endDate 结束时间
@@ -244,29 +242,6 @@ trait DateTimeTrait
         }
         return true;
         
-    }
-
-    /**
-     * 判断时间是否在数组时间内
-     */
-    public function isDateInRange($dateTime, $dateArray) {
-        // 将传入的日期时间字符串转为时间戳
-        $dateTimeStamp = strtotime($dateTime);
-
-        // 确保数组有两个元素
-        if (count($dateArray) < 2) {
-            return false; // 如果数组元素不足，返回 false
-        }
-
-        // 构建开始时间和结束时间的时间戳
-        $startDate = $dateArray[0] . ' 00:00:00';
-        $endDate = $dateArray[1] . ' 23:59:59';
-
-        $startTimestamp = strtotime($startDate);
-        $endTimestamp = strtotime($endDate);
-
-        // 检查日期是否在范围内
-        return $dateTimeStamp >= $startTimestamp && $dateTimeStamp <= $endTimestamp;
     }
 
     /**
