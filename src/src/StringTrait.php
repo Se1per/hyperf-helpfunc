@@ -2,6 +2,7 @@
 
 namespace Japool\HyperfHelpFunc\src;
 
+use Exception;
 
 trait StringTrait
 {
@@ -47,8 +48,57 @@ trait StringTrait
         }
 
         return $replaceStr;
-
     }
+
+     /**
+     * 从字符串中移除指定的子字符串。
+     *
+     * @param string $str 输入字符串
+     * @param string $substr 要移除的子字符串
+     * @param bool $onlyFirstOccurrence 是否只移除第一次出现的子字符串，默认为 true
+     * @return string 处理后的字符串
+     */
+    public static function removeSubstring($str, $substr, $onlyFirstOccurrence = true) {
+        if (!is_string($str) || !is_string($substr)) {
+            throw new Exception(get_called_class() . '数据参数类型不支持');
+        }
+
+        if ($substr === '') {
+            return $str;
+        }
+
+        if ($onlyFirstOccurrence) {
+            // 只移除第一次出现的子字符串
+            $position = strpos($str, $substr);
+            if ($position !== false) {
+                return substr_replace($str, '', $position, strlen($substr));
+            }
+        } else {
+            // 移除所有出现的子字符串
+            return str_replace($substr, '', $str);
+        }
+
+        return $str;
+    }
+
+    /**
+     * 字符串掩码 把字符串得部分替换成指定字符
+     * @param mixed $input
+     * @param mixed $start
+     * @param mixed $length
+     * @param mixed $replaceChar
+     * @return array|string
+     */
+    public static function maskString($input, $start, $length, $replaceChar = '*') {
+        // 获取需要替换的部分
+        $mask = str_repeat($replaceChar, $length);
+        
+        // 将需要替换的部分替换为指定字符
+        $maskedString = substr_replace($input, $mask, $start, $length);
+        
+        return $maskedString;
+    }
+    
 
     /**
      * 字符串裁剪内容转成数组
