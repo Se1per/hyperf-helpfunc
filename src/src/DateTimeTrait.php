@@ -41,6 +41,41 @@ trait DateTimeTrait
     }
 
     /**
+     * 判断是否为时间戳格式
+     * @param int|string $timestamp 要判断的字符串
+     * @return bool 如果是时间戳返回True,否则返回False
+     */
+    public function isTimestamp($timestamp): bool
+    {
+        $start = strtotime('1970-01-01 00:00:00');
+        $end = strtotime('2099-12-31 23:59:59');
+        //判断是否为时间戳
+        if (!empty($timestamp) && is_numeric($timestamp) && $timestamp <= $end && $timestamp >= $start) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 获得秒级/毫秒级/微秒级/纳秒级时间戳
+     * @param int $level 默认0,获得秒级时间戳. 1.毫秒级时间戳; 2.微秒级时间戳; 3.纳米级时间戳
+     * @return int 时间戳
+     */
+    public static function getTimestamp(int $level = 0): int
+    {
+        if ($level === 0) return time();
+        list($msc, $sec) = explode(' ', microtime());
+        if ($level === 1) {
+            return intval(sprintf('%.0f', (floatval($msc) + floatval($sec)) * 1000));
+        } elseif ($level === 2) {
+            return intval(sprintf('%.0f', (floatval($msc) + floatval($sec)) * 1000 * 1000));
+        } else {
+            return intval(sprintf('%.0f', (floatval($msc) + floatval($sec)) * 1000 * 1000 * 1000));
+        }
+    }
+
+    /**
      * 判断时间格式
      * @param $timestamp
      * @return bool
