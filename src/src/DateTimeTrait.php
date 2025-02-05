@@ -216,9 +216,7 @@ trait DateTimeTrait
     }
 
     /**
-     * 
      * 检查给定日期是否在指定范围内
-     *
      * @param string $dateTime 日期时间字符串，表示需要检查的日期
      * @param array $dateArray 包含开始日期和结束日期的数组
      * @return bool 如果给定日期在范围内则返回true，否则返回false
@@ -242,6 +240,7 @@ trait DateTimeTrait
         // 检查日期是否在范围内
         return $dateTimeStamp >= $startTimestamp && $dateTimeStamp <= $endTimestamp;
     }
+
     
     /**  获取时间周期段内所有时间
      * @param string $startDate 开始时间

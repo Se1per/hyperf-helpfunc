@@ -285,17 +285,17 @@ trait StringTrait
     }
 
     /**
-     * Gzip 压缩
+     * Gzip 压缩 (建议使用)
      * @param $obj
      * @return string
      */
-    function enStringCompress($obj)
+    function enStringCompress($obj,$level = 3)
     {
-        return base64_encode(gzcompress(json_encode($obj, JSON_UNESCAPED_UNICODE)));
+        return base64_encode(gzcompress(json_encode($obj, JSON_UNESCAPED_UNICODE),$level));
     }
 
-    /**
-     * Gzip 解压缩
+    /** 
+     * Gzip 解压缩  (建议使用)
      * @param $obj
      * @return mixed
      */
