@@ -56,7 +56,7 @@ class XlsWriteMain
             $this->excel = $this->excel->fileName($fileName, $sheet);
         }
 
-        $this->excel
+        $this->excel = $this->excel
             ->header($header);
 
         return $this;
